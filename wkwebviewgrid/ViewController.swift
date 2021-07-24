@@ -57,7 +57,35 @@ class ViewController: NSViewController, WKNavigationDelegate {
     
     @IBAction func adjustRows(_ sender: NSSegmentedControl) {
         
+        if sender.selectedSegment == 0 { // add row
+                    
+            // count how many columns we have so far
+            let columnCount = (rows.arrangedSubviews[0] as! NSStackView).arrangedSubviews.count
+            
+            // make a new array of web views that contain the correct number of columns
+            let viewArray = (0 ..< columnCount).map { _ in makeWebView() }
 
+            // use that web view to create a new stack view
+            let row = NSStackView(views: viewArray)
+
+            row.distribution = .fillEqually
+            rows.addArrangedSubview(row)
+            
+        } else {
+            //ensure at least two rows
+            guard rows.arrangedSubviews.count > 1 else {
+                return
+            }
+            // pull out the final row, and make sure its a stack view
+            guard let rowToRemove = rows.arrangedSubviews.last as? NSStackView else { return }
+            // remove webview from screemn
+            for cell in rowToRemove.arrangedSubviews {
+                cell.removeFromSuperview()
+                
+            }
+            // remove the whole stack view row
+            rows.removeArrangedSubview(rowToRemove)
+        }
     }
     
     @IBAction func adjustColumns(_ sender: NSSegmentedControl) {
