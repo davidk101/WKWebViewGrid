@@ -8,9 +8,21 @@
 import Cocoa
 import WebKit
 
-class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognizerDelegate {
+extension NSTouchBarItem.Identifier {
     
+    static let navigation = NSTouchBarItem.Identifier("david-kumar.wkwebviewgrid.navigation") // bundle_identifier.id
+    static let enterAddress = NSTouchBarItem.Identifier("david-kumar.wkwebviewgrid.enterAddress")
+    static let sharingPicker = NSTouchBarItem.Identifier("david-kumar.wkwebviewgrid.sharingPicker")
+    static let adjustGrid = NSTouchBarItem.Identifier("david-kumar.wkwebviewgrid.adjustGrid")
+    static let adjustRows = NSTouchBarItem.Identifier("david-kumar.wkwebviewgrid.adjustRows")
+    static let adjustCols = NSTouchBarItem.Identifier("david-kumar.wkwebviewgrid.adjustCols")
+    
+}
+
+class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognizerDelegate, NSSharingServicePickerTouchBarItemDelegate, NSTouchBarDelegate {
     // every wkwebview must have a Core Animation layer behind it since macOS does not have that already
+    // identifier -> control -> add to NSTouchBar
+    // no API to detect if touch bar present -> INTENTIONAL -> no exclusivity
     
     var rows: NSStackView!
     var selectedWebView: WKWebView!
@@ -195,6 +207,29 @@ class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognize
         
     }
     
+
+    
+    override func makeTouchBar() -> NSTouchBar? { // necessary to override
+        
+        // enable custom touch bar
+        NSApp.isAutomaticCustomizeTouchBarMenuItemEnabled = true
+        
+        // touch bar with ViewController as delegate
+        let touchBar = NSTouchBar()
+        touchBar.customizationIdentifier = NSTouchBar.CustomizationIdentifier("david-kumar.wkwebviewgrid")
+        touchBar.delegate = self
+        
+        touchBar.defaultItemIdentifiers = [.navigation, .adjustGrid, .enterAddress, .sharingPicker]
+        touchBar.principalItemIdentifier = .enterAddress
+        touchBar.customizationAllowedItemIdentifiers = [.adjustGrid, .adjustCols, .adjustRows]
+        touchBar.customizationRequiredItemIdentifiers = [.enterAddress]
+
+        return touchBar
+    }
+    
+    func items(for pickerTouchBarItem: NSSharingServicePickerTouchBarItem) -> [Any] {
+        <#code#>
+    }
     
 }
 
