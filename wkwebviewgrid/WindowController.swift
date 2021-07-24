@@ -9,6 +9,7 @@ import Cocoa
 
 class WindowController: NSWindowController {
 
+    @IBOutlet weak var addressEntry: NSTextField!
     override func windowDidLoad() {
         super.windowDidLoad()
         

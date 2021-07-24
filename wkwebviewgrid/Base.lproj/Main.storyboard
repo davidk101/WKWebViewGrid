@@ -707,6 +707,9 @@
                                                 <segment image="NSGoRightTemplate" width="32" tag="1"/>
                                             </segments>
                                         </segmentedCell>
+                                        <connections>
+                                            <action selector="navigationClicked:" target="Oky-zY-oP4" id="MXv-9F-kbS"/>
+                                        </connections>
                                     </segmentedControl>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="E334D05A-5502-4F73-A70C-3C2D9070AD30" label="" paletteLabel="" sizingBehavior="auto" id="XTF-sc-qO5">
@@ -721,6 +724,9 @@
                                                 <segment image="NSRemoveTemplate" width="32" tag="1"/>
                                             </segments>
                                         </segmentedCell>
+                                        <connections>
+                                            <action selector="adjustRows:" target="Oky-zY-oP4" id="8KN-Ow-rUN"/>
+                                        </connections>
                                     </segmentedControl>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="34712B60-09A8-4732-BCFD-255FD01EC5FF" label="" paletteLabel="" sizingBehavior="auto" id="swh-IW-ISt">
@@ -735,6 +741,9 @@
                                                 <segment image="NSRemoveTemplate" width="32" tag="1"/>
                                             </segments>
                                         </segmentedCell>
+                                        <connections>
+                                            <action selector="adjustColumns:" target="Oky-zY-oP4" id="3pZ-hF-PVO"/>
+                                        </connections>
                                     </segmentedControl>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="E432A53B-65AA-4355-83D0-036417C7CBE1" label="" paletteLabel="" id="8Dr-kG-VLt">
@@ -749,6 +758,9 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <action selector="urlEntered:" target="Oky-zY-oP4" id="mdz-l9-eGK"/>
+                                        </connections>
                                     </textField>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="35224A67-5CCD-4380-B4D1-906554FCC2DD" label="" paletteLabel="" sizingBehavior="auto" id="Ets-z4-X0D">
@@ -793,6 +805,7 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="addressEntry" destination="gmC-Af-oOR" id="IPm-Vo-x3n"/>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
                     </connections>
                 </windowController>
