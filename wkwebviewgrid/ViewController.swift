@@ -8,10 +8,12 @@
 import Cocoa
 import WebKit
 
-class ViewController: NSViewController, WKNavigationDelegate {
+class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognizerDelegate {
+    
     // every wkwebview must have a Core Animation layer behind it since macOS does not have that already
     
     var rows: NSStackView!
+    var selectedWebView: WKWebView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,9 +121,39 @@ class ViewController: NSViewController, WKNavigationDelegate {
         webView.navigationDelegate = self
         webView.wantsLayer = true // for the added CA layer
         webView.load(URLRequest(url: URL(string: "https://www.davidkumar.tech")!)) // app transport security exemption may be needed here
+        
+        // add gesture recognizer delegate 
+        let recognizer = NSClickGestureRecognizer(target: self, action: #selector(webViewClicked))
+        recognizer.delegate = self
+        webView.addGestureRecognizer(recognizer)
+        
+        if selectedWebView == nil {
+            select(webView: webView)
+        }
             
         return webView
             
+    }
+    
+    func select(webView: WKWebView) {
+        
+        selectedWebView = webView
+        selectedWebView.layer?.borderWidth = 2
+        selectedWebView.layer?.borderColor = NSColor.green.cgColor
+        
+    }
+    
+    @objc func webViewClicked(recognizer: NSClickGestureRecognizer) {
+        
+        // get the web view that triggered the gesture recoginzer
+        guard let newSelectedWebView = recognizer.view as? WKWebView else { return }
+        // deselect the currently selected web view if there is one
+        if let selected = selectedWebView {
+            selected.layer?.borderWidth = 0
+        }
+        // select the new view
+        select(webView: newSelectedWebView)
+        
     }
 }
 
