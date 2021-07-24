@@ -70,7 +70,7 @@ class ViewController: NSViewController, WKNavigationDelegate {
         let webView = WKWebView()
         webView.navigationDelegate = self
         webView.wantsLayer = true // for the added CA layer
-        webView.load(URLRequest(url: URL(string: "https://www.apple.com")!))
+        webView.load(URLRequest(url: URL(string: "https://www.davidkumar.tech")!)) // app transport security exemption may be needed here 
             
         return webView
             
