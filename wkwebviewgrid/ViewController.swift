@@ -212,6 +212,7 @@ class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognize
         switch identifier {
             
         case NSTouchBarItem.Identifier.enterAddress:
+            
             let button = NSButton(title: "Search or enter website name", target: self, action: #selector(selectedAddressEntry))
             button.setContentHuggingPriority(NSLayoutConstraint.Priority(rawValue: 10), for: .horizontal) // priority given to button's size
             let customTouchBarItem = NSCustomTouchBarItem(identifier: identifier)
@@ -233,9 +234,35 @@ class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognize
             customTouchBarItem.view = segmentedControl
 
             return customTouchBarItem
-
-
             
+        case NSTouchBarItem.Identifier.adjustGrid:
+            
+            let popOver = NSPopoverTouchBarItem(identifier: identifier) // nested touch bar items
+            popOver.collapsedRepresentationLabel = "Grid"
+            popOver.customizationLabel = "Adjust Grid"
+            popOver.popoverTouchBar = NSTouchBar()
+            popOver.popoverTouchBar.delegate = self
+            popOver.popoverTouchBar.defaultItemIdentifiers = [.adjustRows, .adjustCols]
+            
+            return popOver
+            
+        case NSTouchBarItem.Identifier.adjustRows:
+            
+            let control = NSSegmentedControl(labels: ["Row++", "Row--"], trackingMode: .momentaryAccelerator, target: self, action: #selector(adjustRows))
+            let customTouchBarItem = NSCustomTouchBarItem(identifier: identifier)
+            customTouchBarItem.customizationLabel = "Row"
+            customTouchBarItem.view = control
+            
+            return customTouchBarItem
+            
+        case NSTouchBarItem.Identifier.adjustCols:
+            let control = NSSegmentedControl(labels: ["Col++", "Col--"], trackingMode: .momentaryAccelerator, target: self, action: #selector(adjustColumns))
+            let customTouchBarItem = NSCustomTouchBarItem(identifier: identifier)
+            customTouchBarItem.customizationLabel = "Col"
+            customTouchBarItem.view = control
+            
+            return customTouchBarItem
+        
         default:
             return nil
         }
