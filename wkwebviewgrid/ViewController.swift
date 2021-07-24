@@ -47,14 +47,24 @@ class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognize
     }
     
     @IBAction func urlEntered(_ sender: NSTextField) {
-
+        // ensure web view selected
+        guard let selected = selectedWebView else { return }
         
+        // convert string for URL Request
+        if let url = URL(string: sender.stringValue) {
+            selected.load(URLRequest(url: url))
+        }
     }
     
     @IBAction func navigationClicked(_ sender: NSSegmentedControl) {
-        
-
-        
+        // ensure web view selected
+        guard let selected = selectedWebView else { return }
+        if sender.selectedSegment == 0 { // back requested
+            selected.goBack()
+            
+        } else { // forward requested
+            selected.goForward()
+        }
     }
     
     @IBAction func adjustRows(_ sender: NSSegmentedControl) {
@@ -122,11 +132,12 @@ class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognize
         webView.wantsLayer = true // for the added CA layer
         webView.load(URLRequest(url: URL(string: "https://www.davidkumar.tech")!)) // app transport security exemption may be needed here
         
-        // add gesture recognizer delegate 
+        // add gesture recognizer delegate
         let recognizer = NSClickGestureRecognizer(target: self, action: #selector(webViewClicked))
         recognizer.delegate = self
         webView.addGestureRecognizer(recognizer)
         
+        // defaults the webview to the first one generated
         if selectedWebView == nil {
             select(webView: webView)
         }
@@ -154,6 +165,16 @@ class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognize
         // select the new view
         select(webView: newSelectedWebView)
         
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: NSGestureRecognizer, shouldAttemptToRecognizeWith event: NSEvent) -> Bool {
+        
+        if gestureRecognizer.view == selectedWebView{
+            return false
+        }
+        else{
+            return true
+        }
     }
 }
 
