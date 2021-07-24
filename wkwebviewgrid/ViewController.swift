@@ -152,6 +152,12 @@ class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognize
         selectedWebView.layer?.borderWidth = 2
         selectedWebView.layer?.borderColor = NSColor.green.cgColor
         
+        // retrieving web address String
+        if let WindowController = view.window?.windowController as? WindowController {
+            
+            WindowController.addressEntry.stringValue = selectedWebView.url?.absoluteString ?? "" // nil coalescing
+        }
+        
     }
     
     @objc func webViewClicked(recognizer: NSClickGestureRecognizer) {
@@ -176,5 +182,19 @@ class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognize
             return true
         }
     }
+    
+    // called every time web content loads
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        
+        guard webView == selectedWebView else { return }
+        
+        // updates address URL when website changes using the delegate
+        if let WindowController = view.window?.windowController as? WindowController {
+            WindowController.addressEntry.stringValue = selectedWebView.url?.absoluteString ?? ""
+        }
+        
+    }
+    
+    
 }
 
