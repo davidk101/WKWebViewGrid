@@ -801,7 +801,7 @@
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
-                            <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="k8b-Mk-EAE"/>
                         </connections>
                     </window>
                     <connections>

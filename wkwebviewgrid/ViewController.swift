@@ -19,7 +19,7 @@ extension NSTouchBarItem.Identifier {
     
 }
 
-class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognizerDelegate, NSSharingServicePickerTouchBarItemDelegate, NSTouchBarDelegate {
+class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognizerDelegate, NSTouchBarDelegate {
     // every wkwebview must have a Core Animation layer behind it since macOS does not have that already
     // identifier -> control -> add to NSTouchBar
     // no API to detect if touch bar present -> INTENTIONAL -> no exclusivity
@@ -207,7 +207,47 @@ class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognize
         
     }
     
+    func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
+        
+        switch identifier {
+            
+        case NSTouchBarItem.Identifier.enterAddress:
+            let button = NSButton(title: "Search or enter website name", target: self, action: #selector(selectedAddressEntry))
+            button.setContentHuggingPriority(NSLayoutConstraint.Priority(rawValue: 10), for: .horizontal) // priority given to button's size
+            let customTouchBarItem = NSCustomTouchBarItem(identifier: identifier)
+            
+            customTouchBarItem.view = button
+            return customTouchBarItem
+            
+        case NSTouchBarItem.Identifier.navigation:
+            
+            // backward and forward images
+            let back = NSImage(named: NSImage.touchBarGoBackTemplateName)!
+            let forward = NSImage(named: NSImage.touchBarGoForwardTemplateName)!
+            
+            // create segmented control
+            let segmentedControl = NSSegmentedControl(images: [back, forward], trackingMode: .momentary, target: self, action: #selector(navigationClicked))
+            
+            // wrap that inside a Touch Bar item
+            let customTouchBarItem = NSCustomTouchBarItem(identifier: identifier)
+            customTouchBarItem.view = segmentedControl
 
+            return customTouchBarItem
+
+
+            
+        default:
+            return nil
+        }
+        
+    }
+    
+    @objc func selectedAddressEntry() {
+        
+        if let windowController = view.window?.windowController as? WindowController {
+            windowController.window?.makeFirstResponder(windowController.addressEntry) // primary responder
+        }
+    }
     
     override func makeTouchBar() -> NSTouchBar? { // necessary to override
         
@@ -226,10 +266,5 @@ class ViewController: NSViewController, WKNavigationDelegate, NSGestureRecognize
 
         return touchBar
     }
-    
-    func items(for pickerTouchBarItem: NSSharingServicePickerTouchBarItem) -> [Any] {
-        <#code#>
-    }
-    
 }
 
