@@ -61,16 +61,36 @@ class ViewController: NSViewController, WKNavigationDelegate {
     }
     
     @IBAction func adjustColumns(_ sender: NSSegmentedControl) {
-
-            
+        
+        if sender.selectedSegment == 0 { // add column
+            for case let row as NSStackView in rows.arrangedSubviews {
+                row.addArrangedSubview(makeWebView())
+            }
         }
+        else { // remove column
+            guard let firstRow = rows.arrangedSubviews.first as? NSStackView else {
+                return
+            }
+            // ensure tow columns
+            guard firstRow.arrangedSubviews.count > 1 else { return }
+            // safe to delete a column
+            for case let row as NSStackView in rows.arrangedSubviews {
+                // loop over every row
+                if let last = row.arrangedSubviews.last {
+                    // remove lst web view in the column
+                    row.removeView(last)
+                    last.removeFromSuperview()
+                }
+            }
+        }
+    }
         
     func makeWebView() -> NSView {
             
         let webView = WKWebView()
         webView.navigationDelegate = self
         webView.wantsLayer = true // for the added CA layer
-        webView.load(URLRequest(url: URL(string: "https://www.davidkumar.tech")!)) // app transport security exemption may be needed here 
+        webView.load(URLRequest(url: URL(string: "https://www.davidkumar.tech")!)) // app transport security exemption may be needed here
             
         return webView
             
