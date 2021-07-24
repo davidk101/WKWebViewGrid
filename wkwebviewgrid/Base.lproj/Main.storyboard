@@ -688,9 +688,9 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="650" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="900" height="400"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <value key="minSize" type="size" width="650" height="270"/>
+                        <value key="minSize" type="size" width="900" height="400"/>
                         <toolbar key="toolbar" implicitIdentifier="80E76A5C-1EB7-4B15-9435-C696B5457F89" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconOnly" sizeMode="regular" id="Spk-bP-tuS">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="uXJ-u0-ucY"/>
@@ -700,7 +700,7 @@
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="T40-yp-GGb">
                                         <rect key="frame" x="0.0" y="14" width="75" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="Ofs-K3-b5j">
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Ofs-K3-b5j">
                                             <font key="font" metaFont="system"/>
                                             <segments>
                                                 <segment image="NSGoLeftTemplate" width="32"/>
@@ -717,7 +717,7 @@
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="UgY-ji-Df7">
                                         <rect key="frame" x="0.0" y="14" width="75" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="5vK-xE-YFu">
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="5vK-xE-YFu">
                                             <font key="font" metaFont="system"/>
                                             <segments>
                                                 <segment image="NSAddTemplate" width="32"/>
@@ -734,7 +734,7 @@
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="nJf-xE-j3K">
                                         <rect key="frame" x="0.0" y="14" width="75" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="Wl2-8S-XRj">
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="Wl2-8S-XRj">
                                             <font key="font" metaFont="system"/>
                                             <segments>
                                                 <segment image="NSAddTemplate" width="32"/>
@@ -768,7 +768,7 @@
                                     <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="bqT-0Z-22W">
                                         <rect key="frame" x="0.0" y="14" width="41" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Rows" id="vhr-kt-U83">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Row" id="vhr-kt-U83">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -780,7 +780,7 @@
                                     <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="2I7-Ti-geO">
                                         <rect key="frame" x="0.0" y="14" width="35" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Cols" id="GsG-MR-KZB">
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Col" id="GsG-MR-KZB">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
