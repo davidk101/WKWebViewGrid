@@ -10,7 +10,13 @@ iOS 8.0+ & macOS 10.10+
 
 ## Installation
 
-WKWebViewGrid is available through [CocoaPods](https://cocoapods.org). To install
+WKWebViewGrid is available through [CocoaPods](https://cocoapods.org). 
+
+<p align="left">
+  <img width="550" src="demo.png">
+</p>
+
+To install
 it, simply add the following line to your Podfile:
 
 ```ruby
